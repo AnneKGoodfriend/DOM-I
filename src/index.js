@@ -39,4 +39,106 @@ const siteContent = { // DO NOT CHANGE THIS OBJECT
   },
 };
 
+//logo 
+const logoImg = document.getElementById('logo-img');
+logoImg.src= siteContent["images"]["logo-img"];
+
+//nav
+const navLinks = document.querySelectorAll('nav a');
+const linkTexts = Object.values(siteContent.nav); // making an array
+navLinks.forEach((link, index) => link.textContent = linkTexts[index]); // running function for each item in the array takes two arguments (value, location within the array) 
+
+// simple for loop solution:
+
+// for (let i = 0; i < navLinks.length; i++){
+//   const linkElement = navLinks[i]
+//   const linkTextValue = linkTexts[i]
+
+//   linkElement.textContent = linkTextValue
+// }
+
+//section cta
+const ctaImg = document.getElementById('cta-img')
+const headerChange = document.querySelector('.cta-text h1')
+const buttonChange = document.querySelector('.cta-text button')
+
+ctaImg.src= siteContent["images"]["cta-img"]
+headerChange.innerHTML = siteContent['cta']['h1'];
+buttonChange.innerHTML = siteContent['cta']['button'];
+
+
+//Middle Image
+const middleImg = document.getElementById('middle-img')
+middleImg.src= siteContent["images"]["accent-img"];
+
+//Main Text Content 
+const mainContent = siteContent["main-content"]
+const mainContentKeys = Object.keys(mainContent)
+
+const h4TextElements = document.querySelectorAll(".text-content h4")
+const pTextElements = document.querySelectorAll(".text-content p")
+
+// approach 1:
+// for (let i = 0; i < mainContentKeys.length-1; i+=2){
+//     let h4key = mainContentKeys[i] // gets key for h4 object
+//     let contentKey = mainContentKeys[i+1] // get key for p content objects
+  
+//     let h4Val = mainContent[h4key] // gets h4 content
+//     let contentVal = mainContent[contentKey] // gets p content
+  
+//     h4TextElements[i/2].textContent = h4Val
+//     pTextElements[i/2].textContent = contentVal
+//   }
+
+// approach 2
+// var j = 0
+// h4TextElements.forEach((h4ele, index) => {
+//   h4ele.textContent = mainContent[mainContentKeys[j]]
+//   pTextElements[index].textContent = mainContent[mainContentKeys[j+1]]
+//   j += 2
+// })
+
+//approach 3
+let content = []
+for (let i = 0; i < mainContentKeys.length-1; i+=2){
+
+  let h4key = mainContentKeys[i] // gets key for h4 object
+  let contentKey = mainContentKeys[i+1] // get key for p content objects
+
+  let h4Val = mainContent[h4key] // gets h4 content
+  let contentVal = mainContent[contentKey] // gets p content
+
+  content.push({
+    h4: h4Val,
+    content: contentVal,
+  })
+}
+
+content.forEach(({h4, content}, index) => {
+  h4TextElements[index].textContent = h4
+  pTextElements[index].textContent = content
+})
+
+
+//Contact Section
+const h4About = document.querySelector('.contact h4')
+h4About.textContent= siteContent["contact"]["contact-h4"];
+
+const pContact = document.querySelectorAll('.contact p');
+const pTexts = Object.values(siteContent.contact); 
+
+pContact.forEach((pContent, index) => pContent.textContent = pTexts[index+1]); 
+
+// simple for loop solution:
+// for (let i = 0; i < pContact.length; i++){
+//   const pContent = pContact[i]
+//   const contactText = pTexts[i]
+
+//   pContent.textContent = contactText
+// }
+
+//footer
+const footerContent = document.querySelector('footer a')
+footerContent.textContent = siteContent["footer"]["copyright"];
+
 console.log('project wired!')
